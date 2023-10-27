@@ -2,9 +2,6 @@
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 
-*.ShaderLab linguist-vendored=false
-*.HLSL linguist-vendored=false
-
 * text=auto
 
 ###############################################################################
