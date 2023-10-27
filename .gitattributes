@@ -1,7 +1,6 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
-* .shaderlab linguist-detectable=false
 
 * text=auto
 
