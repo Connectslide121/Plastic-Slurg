@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeoMovement : MonoBehaviour
 {
-    public GameObject BulletPrefab;
-    public float Speed;
+    public float MovementSpeed;
     public float JumpForce;
+    public float ShootCoolDown =0.05f;
+    public GameObject BulletPrefab;
+    public GameObject LeoDeathPrefab;
+    public AudioClip HurtSound;
+    public AudioClip DeathSound;
+
 
     private Rigidbody2D Rigidbody2D;
     private Animator Animator;
@@ -25,6 +31,7 @@ public class LeoMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
@@ -35,7 +42,7 @@ public class LeoMovement : MonoBehaviour
 
         Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
 
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f))
+        if (Physics2D.Raycast(transform.position, Vector3.down, 0.15f))
         {
             Grounded = true;
         }
@@ -48,7 +55,7 @@ public class LeoMovement : MonoBehaviour
         }
         else jumpAnimationTrigger = false;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > LastShoot + 0.15f)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > LastShoot + ShootCoolDown && AmmoTextScript.Ammo > 0)
         {
             Shoot();
             LastShoot = Time.time;
@@ -74,10 +81,27 @@ public class LeoMovement : MonoBehaviour
 
         GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
+
+        AmmoTextScript.Ammo--;
     }
 
     private void FixedUpdate()
     {
-        Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y);
+        Rigidbody2D.velocity = new Vector2(Horizontal * MovementSpeed, Rigidbody2D.velocity.y);
     }
+
+    public void Hit()
+    {
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(HurtSound);
+
+        HealthTextScript.Health = HealthTextScript.Health - 1;
+
+        if (HealthTextScript.Health == 0)
+        {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
+            Destroy(gameObject);
+            Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
 }
