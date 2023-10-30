@@ -10,11 +10,13 @@ public class GruntScript : MonoBehaviour
 
     private float LastShoot;
     private int Health = 3;
+    private float flickerDuration = 0.5f; // Adjust the duration as needed
+    private Color originalColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        originalColor = GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
@@ -50,17 +52,45 @@ public class GruntScript : MonoBehaviour
         }
 
         GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);
+        bullet.GetComponent<EnemyBulletScript>().SetDirection(direction);
     }
 
     public void Hit()
     {
-        Health = Health - 1;
-        if (Health == 0)
+            Health -= 1;
+            if (Health == 0)
+            {
+                Destroy(gameObject);
+                Instantiate(GruntDeathPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                // Call a method to start the flicker effect
+                StartFlickerEffect();
+            }
+    }
+
+    private void StartFlickerEffect()
+    {
+        StartCoroutine(FlickerEnemy());
+    }
+
+    private IEnumerator FlickerEnemy()
+    {
+        float flickerTimer = 0f;
+
+        while (flickerTimer < flickerDuration)
         {
-            Destroy(gameObject);
-            Instantiate(GruntDeathPrefab, transform.position, Quaternion.identity);
+            // Calculate the alpha value based on the flicker timer.
+            float alpha = flickerTimer / flickerDuration;
+            alpha = Mathf.PingPong(alpha * 5f, 1f); // Adjust the speed as needed
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
+            flickerTimer += Time.deltaTime;
+            yield return null;
         }
+
+        // Reset the sprite renderer to its original state.
+        GetComponent<SpriteRenderer>().color = originalColor;
     }
 
 

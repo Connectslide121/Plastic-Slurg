@@ -6,6 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     public AudioClip Shoot;
     public float Speed;
+    public GameObject BulletImpactPrefab;
 
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
@@ -26,7 +27,7 @@ public class BulletScript : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
-        Direction = direction;
+        Direction = direction.normalized;
     }
 
     public void DestroyBullet()
@@ -36,18 +37,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        LeoMovement leo = collision.GetComponent<LeoMovement>();
         GruntScript grunt = collision.GetComponent<GruntScript>();
-
-        if (leo != null)
-        {
-            leo.Hit();
-        }
 
         if ( grunt != null)
         {
             grunt.Hit();
         }
+
+        Instantiate(BulletImpactPrefab, transform.position, Quaternion.identity);
 
         DestroyBullet();
     }

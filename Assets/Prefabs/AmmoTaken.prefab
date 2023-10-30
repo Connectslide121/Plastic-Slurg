@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3367165604799084925}
   - component: {fileID: 3922277982738785461}
   - component: {fileID: -5168699882553372645}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AmmoTaken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,4 +120,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ff6d04df15ec24c96f9cf5102f686b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explode: {fileID: 8300000, guid: 2e34343a24d02f04684ed3fb568f96cb, type: 3}
+  explode: {fileID: 8300000, guid: 459eca275d380054bad156ee6d8f675d, type: 3}

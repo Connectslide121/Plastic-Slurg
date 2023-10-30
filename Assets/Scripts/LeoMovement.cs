@@ -20,15 +20,16 @@ public class LeoMovement : MonoBehaviour
     private bool Grounded;
     private bool jumpAnimationTrigger;
     private float LastShoot;
+    private Vector2 shootingDirection;
+    private int wallLayer;
 
-    // Start is called before the first frame update
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        wallLayer = LayerMask.GetMask("Walls");
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -39,8 +40,6 @@ public class LeoMovement : MonoBehaviour
 
         Animator.SetBool("running", Horizontal != 0.0f);
         Animator.SetBool("jumping", jumpAnimationTrigger != false);
-
-        Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
 
         if (Physics2D.Raycast(transform.position, Vector3.down, 0.15f))
         {
@@ -55,13 +54,26 @@ public class LeoMovement : MonoBehaviour
         }
         else jumpAnimationTrigger = false;
 
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        shootingDirection = (mousePosition - transform.position).normalized;
+        SnapToNearestDirection();
+
         if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > LastShoot + ShootCoolDown && AmmoTextScript.Ammo > 0)
         {
             Shoot();
             LastShoot = Time.time;
         }
+
+
     }
 
+
+    private void SnapToNearestDirection()
+    {
+        float angle = Vector2.SignedAngle(Vector2.right, shootingDirection);
+        float snappedAngle = Mathf.Round(angle / 45.0f) * 45.0f;
+        shootingDirection = Quaternion.Euler(0, 0, snappedAngle) * Vector2.right;
+    }
     private void Jump()
     {
         Rigidbody2D.AddForce(Vector2.up * JumpForce);
@@ -69,15 +81,7 @@ public class LeoMovement : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 direction;
-        if (transform.localScale.x == 1)
-        {
-            direction = Vector2.right;
-        }
-        else
-        {
-            direction = Vector2.left;
-        }
+        Vector3 direction = shootingDirection;
 
         GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
@@ -87,7 +91,18 @@ public class LeoMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rigidbody2D.velocity = new Vector2(Horizontal * MovementSpeed, Rigidbody2D.velocity.y);
+        float horizontalVelocity = Horizontal * MovementSpeed;
+
+        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, Vector2.right * Mathf.Sign(horizontalVelocity), 0.05f, wallLayer);
+
+        if (wallHit.collider == null)
+        {
+            Rigidbody2D.velocity = new Vector2(horizontalVelocity, Rigidbody2D.velocity.y);
+        }
+        else
+        {
+            Rigidbody2D.velocity = new Vector2(0, Rigidbody2D.velocity.y);
+        }
     }
 
     public void Hit()

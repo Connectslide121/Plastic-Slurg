@@ -17,7 +17,7 @@ public class HealthTextScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthText.text = "HEALTH: " + Health;
+        HealthText.text = "x " + Health;
 
 
     }

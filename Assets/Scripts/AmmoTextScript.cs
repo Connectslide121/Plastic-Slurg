@@ -17,7 +17,7 @@ public class AmmoTextScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AmmoText.text = "AMMO: " + Ammo;
+        AmmoText.text = "x " + Ammo;
 
     }
 

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 959850023135800760}
   - component: {fileID: 4519114223036916018}
   - component: {fileID: 8021757747836926451}
-  - component: {fileID: -2964776564304157729}
-  m_Layer: 0
+  - component: {fileID: -2230186398716695972}
+  m_Layer: 8
   m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.0052703805, y: 0.0037402585}
   m_Radius: 0.030989356
---- !u!114 &-2964776564304157729
+--- !u!114 &-2230186398716695972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8399602964004523997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbea31e471d3896478a888527f9d5594, type: 3}
+  m_Script: {fileID: 11500000, guid: 21075fa6cb91c9e4da2f0084af3eca67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Shoot: {fileID: 8300000, guid: 5c7c93d0c70cda0439ebaa0dbb525a78, type: 3}

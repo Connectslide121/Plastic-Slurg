@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4459108833665475800}
   - component: {fileID: 7855386836320737941}
   - component: {fileID: 8250869931322350032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shoot: {fileID: 8300000, guid: 5c7c93d0c70cda0439ebaa0dbb525a78, type: 3}
   Speed: 2
+  BulletImpactPrefab: {fileID: 6687967865382943739, guid: d08c566c2338ad945aa9f86a9c4b9acf, type: 3}
 --- !u!50 &7855386836320737941
 Rigidbody2D:
   serializedVersion: 4
