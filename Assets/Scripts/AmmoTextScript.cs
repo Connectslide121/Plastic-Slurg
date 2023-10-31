@@ -8,17 +8,9 @@ public class AmmoTextScript : MonoBehaviour
     public static int Ammo;
     public Text AmmoText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         AmmoText.text = "x " + Ammo;
-
     }
 
 }

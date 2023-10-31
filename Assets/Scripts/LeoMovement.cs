@@ -7,7 +7,7 @@ public class LeoMovement : MonoBehaviour
 {
     public float MovementSpeed;
     public float JumpForce;
-    public float ShootCoolDown =0.05f;
+    public float ShootCoolDown = 0.05f;
     public GameObject BulletPrefab;
     public GameObject LeoDeathPrefab;
     public AudioClip HurtSound;
@@ -20,7 +20,6 @@ public class LeoMovement : MonoBehaviour
     private bool Grounded;
     private bool jumpAnimationTrigger;
     private float LastShoot;
-    private Vector2 shootingDirection;
     private int wallLayer;
 
     void Start()
@@ -36,7 +35,7 @@ public class LeoMovement : MonoBehaviour
         Horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (Horizontal > 0.0f) transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+        else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
         Animator.SetBool("running", Horizontal != 0.0f);
         Animator.SetBool("jumping", jumpAnimationTrigger != false);
@@ -46,7 +45,7 @@ public class LeoMovement : MonoBehaviour
             Grounded = true;
         }
         else Grounded = false;
-      
+
         if (Input.GetKeyDown(KeyCode.Space) && Grounded)
         {
             Jump();
@@ -54,26 +53,20 @@ public class LeoMovement : MonoBehaviour
         }
         else jumpAnimationTrigger = false;
 
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        shootingDirection = (mousePosition - transform.position).normalized;
-        SnapToNearestDirection();
-
         if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > LastShoot + ShootCoolDown && AmmoTextScript.Ammo > 0)
         {
             Shoot();
             LastShoot = Time.time;
         }
-
+        if (HealthTextScript.Health == 0)
+        {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
+            Destroy(gameObject);
+            Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
+        }
 
     }
 
-
-    private void SnapToNearestDirection()
-    {
-        float angle = Vector2.SignedAngle(Vector2.right, shootingDirection);
-        float snappedAngle = Mathf.Round(angle / 45.0f) * 45.0f;
-        shootingDirection = Quaternion.Euler(0, 0, snappedAngle) * Vector2.right;
-    }
     private void Jump()
     {
         Rigidbody2D.AddForce(Vector2.up * JumpForce);
@@ -81,7 +74,15 @@ public class LeoMovement : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 direction = shootingDirection;
+        Vector3 direction;
+        if (transform.localScale.x == 1)
+        {
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = Vector2.left;
+        }
 
         GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
@@ -110,13 +111,6 @@ public class LeoMovement : MonoBehaviour
         Camera.main.GetComponent<AudioSource>().PlayOneShot(HurtSound);
 
         HealthTextScript.Health = HealthTextScript.Health - 1;
-
-        if (HealthTextScript.Health == 0)
-        {
-            Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
-            Destroy(gameObject);
-            Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
-        }
     }
 
 }
