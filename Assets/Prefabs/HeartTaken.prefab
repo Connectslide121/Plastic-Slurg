@@ -120,4 +120,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec95eb5e279058408fa6a8849a9d1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  take: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  HeartTaken: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}

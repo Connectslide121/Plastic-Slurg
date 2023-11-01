@@ -30,7 +30,7 @@ public class JumpBoostScript : MonoBehaviour
         leoMovement.JumpForce = jumpForceBoost;
         JumpBoostEffectIcon.SetActive(true);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
         leoMovement.JumpForce = 150;
         JumpBoostEffectIcon.SetActive(false);
