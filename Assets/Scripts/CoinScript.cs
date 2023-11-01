@@ -10,12 +10,9 @@ public class CoinScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            ScoreTextScript.Score += ScoreToAdd;
-            Instantiate(CoinTakenPrefab, transform.position, Quaternion.identity);
-            DestroyCoin();
-        }
+        ScoreTextScript.Score += ScoreToAdd;
+        Instantiate(CoinTakenPrefab, transform.position, Quaternion.identity);
+        DestroyCoin();
     }
 
     public void DestroyCoin()

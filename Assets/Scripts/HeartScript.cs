@@ -11,12 +11,9 @@ public class HeartScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            HealthTextScript.Health += HealthToAdd;
-            Instantiate(HeartTakenPrefab, transform.position + heightOffset, Quaternion.identity); 
-            DestroyHeart();
-        }
+        HealthTextScript.Health += HealthToAdd;
+        Instantiate(HeartTakenPrefab, transform.position + heightOffset, Quaternion.identity); 
+        DestroyHeart();
     }
 
     public void DestroyHeart()

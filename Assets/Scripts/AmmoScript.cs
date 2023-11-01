@@ -13,12 +13,9 @@ public class AmmoScript : MonoBehaviour
        
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            AmmoTextScript.Ammo += AmmoToAdd;
-            Instantiate(AmmoTakenPrefab, transform.position, Quaternion.identity);
-            DestroyAmmo();
-        }
+        AmmoTextScript.Ammo += AmmoToAdd;
+        Instantiate(AmmoTakenPrefab, transform.position, Quaternion.identity);
+        DestroyAmmo();
     }
 
     public void DestroyAmmo()

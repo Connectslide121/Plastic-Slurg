@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3905726826845927359}
   - component: {fileID: 2883470485069107734}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: bigcrate (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985353126347541742}
   - component: {fileID: 630910447486524273}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: bigcrate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5096183326333905317}
   - component: {fileID: 687162693402572039}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: bigcrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3603618055030207859}
   - component: {fileID: 4054801682900163307}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: bigcrate (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 5097165635535221554}
   - component: {fileID: 1020515396639590980}
   - component: {fileID: 590067939081231293}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

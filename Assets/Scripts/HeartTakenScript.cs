@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HeartTakenScript : MonoBehaviour
 {
-    public AudioClip take;
+    public AudioClip HeartTaken;
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(take);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(HeartTaken);
 
     }
 

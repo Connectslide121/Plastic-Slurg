@@ -10,6 +10,7 @@ public class ScoreTextScript : MonoBehaviour
 
     void Update()
     {
-        ScoreText.text = "x " + Score;
+        float totalScore = Score + AmmoTextScript.Ammo * 10 + HealthTextScript.Health * 50;
+        ScoreText.text = "x " + totalScore;
     }
 }

@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 99645
   packageName: 2D Pixel Item Asset Pack
   packageVersion: 1.0
-  assetPath: Assets/2D Pixel Item Pack/Light Outline/S_ItemLightOutline_HeartRed_00.png
+  assetPath: Assets/SpriteSheets/S_ItemLightOutline_HeartRed_00.png
   uploadId: 199895
 TextureImporter:
   internalIDToNameTable: []

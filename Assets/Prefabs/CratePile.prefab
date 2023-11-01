@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2934076471071834159}
   - component: {fileID: 8563335716340000891}
   - component: {fileID: 4540848360354130609}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: crate (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9086311291938862114}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: CratePile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7407876944006544331}
   - component: {fileID: 2280136542154431935}
   - component: {fileID: 3233147527317179000}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 798429862189163306}
   - component: {fileID: 4915351590593889794}
   - component: {fileID: 3496758203653557766}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: crate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

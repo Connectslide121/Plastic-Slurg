@@ -13,14 +13,14 @@ TagManager:
   - Water
   - UI
   - Player
+  - Enemies
   - PlayerBullets
-  - Projectiles
+  - EnemyBullets
   - Collectables
   - Walls
-  - 
-  - 
-  - 
-  - 
+  - HorizontalRopes
+  - RopeEnds
+  - Hanging
   - 
   - 
   - 

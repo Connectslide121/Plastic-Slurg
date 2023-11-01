@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7752928032525998769}
   - component: {fileID: 222749181086482809}
   - component: {fileID: 6926405635884082010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,3 +189,4 @@ MonoBehaviour:
   Leo: {fileID: 0}
   BulletPrefab: {fileID: 8399602964004523997, guid: 459317b9bbd33ab4fa38a8172c874a17, type: 3}
   GruntDeathPrefab: {fileID: 3143964811501984750, guid: 49894262044396045aa3afceac463035, type: 3}
+  ShootingDistance: 1

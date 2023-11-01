@@ -7,19 +7,18 @@ public class GruntScript : MonoBehaviour
     public GameObject Leo;
     public GameObject BulletPrefab;
     public GameObject GruntDeathPrefab;
+    public float ShootingDistance = 1.0f;
 
     private float LastShoot;
     private int Health = 3;
     private float flickerDuration = 0.5f; // Adjust the duration as needed
     private Color originalColor;
 
-    // Start is called before the first frame update
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Leo == null) return;
@@ -30,7 +29,7 @@ public class GruntScript : MonoBehaviour
 
         float distance = Mathf.Abs(Leo.transform.position.x - transform.position.x);
 
-        if(distance < 1.0f && Time.time > LastShoot + 0.5f)
+        if(distance < ShootingDistance && Time.time > LastShoot + 0.5f)
         {
             Shoot();
             LastShoot = Time.time;
@@ -60,6 +59,7 @@ public class GruntScript : MonoBehaviour
             Health -= 1;
             if (Health == 0)
             {
+                ScoreTextScript.Score += 50;
                 Destroy(gameObject);
                 Instantiate(GruntDeathPrefab, transform.position, Quaternion.identity);
             }
