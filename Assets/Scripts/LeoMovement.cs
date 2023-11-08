@@ -52,14 +52,14 @@ public class LeoMovement : MonoBehaviour
         }
         else Grounded = false;
 
-        if (Input.GetKeyDown(KeyCode.Space) && Grounded)
+        if (Input.GetButtonDown("Jump") && Grounded)
         {
             Jump();
             jumpAnimationTrigger = true;
         }
         else jumpAnimationTrigger = false;
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time > LastShoot + ShootCoolDown && AmmoTextScript.Ammo > 0)
+        if ((Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Z)) && Time.time > LastShoot + ShootCoolDown && AmmoTextScript.Ammo > 0)
         {
             Shoot();
             LastShoot = Time.time;
