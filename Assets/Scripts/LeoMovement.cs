@@ -129,6 +129,7 @@ public class LeoMovement : MonoBehaviour
 
     public void GameOver()
     {
+        Camera.main.GetComponent<AudioSource>().Stop();
         Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
         Destroy(gameObject);
         Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);

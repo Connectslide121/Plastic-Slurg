@@ -38,10 +38,16 @@ public class BulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GruntScript grunt = collision.GetComponent<GruntScript>();
+        BossScript boss = collision.GetComponent<BossScript>();
 
         if ( grunt != null)
         {
             grunt.Hit();
+        }
+
+        if ( boss != null)
+        {
+            boss.Hit();
         }
 
         Instantiate(BulletImpactPrefab, transform.position, Quaternion.identity);
