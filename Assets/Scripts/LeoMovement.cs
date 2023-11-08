@@ -10,6 +10,7 @@ public class LeoMovement : MonoBehaviour
     public float ShootCoolDown = 0.05f;
     public GameObject BulletPrefab;
     public GameObject LeoDeathPrefab;
+    public GameObject Boss;
     public AudioClip HurtSound;
     public AudioClip DeathSound;
     public AudioClip JumpSound;
@@ -131,6 +132,8 @@ public class LeoMovement : MonoBehaviour
     {
         Camera.main.GetComponent<AudioSource>().Stop();
         Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
+        Boss.GetComponent<AudioSource>().Stop();
+
         Destroy(gameObject);
         Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
     }
