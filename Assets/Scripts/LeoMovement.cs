@@ -28,12 +28,14 @@ public class LeoMovement : MonoBehaviour
     private bool jumpAnimationTrigger;
     private float LastShoot;
     private int wallLayer;
+    private Color originalColor;
 
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         wallLayer = LayerMask.GetMask("Walls");
+        originalColor = GetComponent<SpriteRenderer>().color;
     }
 
     void Update()
@@ -168,6 +170,34 @@ public class LeoMovement : MonoBehaviour
         Camera.main.GetComponent<AudioSource>().PlayOneShot(HurtSound);
 
         HealthTextScript.Health = HealthTextScript.Health - 1;
+        StartFlickerEffect();
+
     }
+
+    private void StartFlickerEffect()
+    {
+        StartCoroutine(FlickerEnemy());
+    }
+
+    private IEnumerator FlickerEnemy()
+    {
+        float flickerTimer = 0f;
+        float flickerDuration = 0.5f;
+
+
+        while (flickerTimer < flickerDuration)
+        {
+            // Calculate the alpha value based on the flicker timer.
+            float alpha = flickerTimer / flickerDuration;
+            alpha = Mathf.PingPong(alpha * 5f, 1f); // Adjust the speed as needed
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
+            flickerTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset the sprite renderer to its original state.
+        GetComponent<SpriteRenderer>().color = originalColor;
+    }
+
 
 }

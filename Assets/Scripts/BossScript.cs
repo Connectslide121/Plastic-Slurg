@@ -8,13 +8,16 @@ public class BossScript : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject BossBody;
     public GameObject Boss;
+    public GameObject BossBombPrefab;
+    public Vector3 BombYOffset;
+    public Vector3 BombXOffset;
     public float ShootingDistance = 2.0f;
 
-    private Vector3 offset = new Vector3(0, -0.5f, 0);
     private float LastShoot;
-    private int Health = 20;
+    private int Health = 32;
     private float flickerDuration = 0.5f;
     private Color originalColor;
+    private Vector3 playerPosition;
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
+        playerPosition = Leo.transform.position;
+
         if (Leo == null) return;
 
         Vector3 direction = Leo.transform.position - transform.position;
@@ -31,16 +36,40 @@ public class BossScript : MonoBehaviour
 
         float distance = Mathf.Abs(Leo.transform.position.x - transform.position.x);
 
-        if (distance < ShootingDistance && Time.time > LastShoot + 0.7f && (Health > 15 || (Health <= 10 && Health > 5)))
+        if (distance < ShootingDistance && Time.time > LastShoot + 0.7f && Health > 24)
         {
             Shoot();
             LastShoot = Time.time;
         }
 
-        if (distance < ShootingDistance && Time.time > LastShoot + 0.7f && ((Health <= 15 && Health > 10) || (Health < 10 && Health <= 5)))
+        if (distance < ShootingDistance && Time.time > LastShoot + 1.2f && (Health <= 24 && Health > 16))
         {
+            Shoot();
             ShootBombs();
             LastShoot = Time.time;
+        }
+
+        if (distance < ShootingDistance && Time.time > LastShoot + 0.5f && (Health <= 16 && Health > 8))
+        {
+            Shoot();
+            LastShoot = Time.time;
+        }
+
+        if (distance < ShootingDistance && Time.time > LastShoot + 1f && Health <= 8)
+        {
+            Shoot();
+            ShootBombs();
+            LastShoot = Time.time;
+        }
+
+        if(Health <= 24 && Health > 16)
+        {
+            GetComponent<SpriteRenderer>().color = Color.yellow;
+        }
+
+        if(Health <= 8)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
 
 
@@ -48,22 +77,17 @@ public class BossScript : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 direction;
-        if (transform.localScale.x == 1)
-        {
-            direction = Vector2.right;
-        }
-        else
-        {
-            direction = Vector2.left;
-        }
+        Vector3 playerDirection = (Leo.transform.position - transform.position).normalized;
 
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f + offset, Quaternion.identity);
-        bullet.GetComponent<EnemyBulletScript>().SetDirection(direction);
+        GameObject bullet = Instantiate(BulletPrefab, transform.position + playerDirection * 0.1f, Quaternion.identity);
+        bullet.GetComponent<EnemyBulletScript>().SetDirection(playerDirection);
     }
 
     private void ShootBombs()
     {
+        Instantiate(BossBombPrefab, playerPosition + BombYOffset, Quaternion.Euler(0, 0, -90));
+        Instantiate(BossBombPrefab, playerPosition + BombYOffset - BombXOffset, Quaternion.Euler(0, 0, -90));
+        Instantiate(BossBombPrefab, playerPosition + BombYOffset + BombXOffset, Quaternion.Euler(0, 0, -90));
 
     }
 

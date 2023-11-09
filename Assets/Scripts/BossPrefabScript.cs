@@ -10,7 +10,6 @@ public class BossPrefabScript : MonoBehaviour
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().Stop();
         
 
     }
@@ -20,4 +19,5 @@ public class BossPrefabScript : MonoBehaviour
         Instantiate(BossDeathPrefab, transform.position, Quaternion.identity);
         Instantiate(BossDeathExplosionPrefab, transform.position, Quaternion.identity);
     }
+
 }
