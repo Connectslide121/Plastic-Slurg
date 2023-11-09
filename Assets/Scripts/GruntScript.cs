@@ -8,15 +8,18 @@ public class GruntScript : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject GruntDeathPrefab;
     public float ShootingDistance = 1.0f;
+    public float MaxHealth = 3;
+    public float Health = 3;
 
+    private FloatingHealthBar HealthBar;
     private float LastShoot;
-    private int Health = 3;
     private float flickerDuration = 0.5f; // Adjust the duration as needed
     private Color originalColor;
 
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
+        HealthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     void Update()
@@ -57,6 +60,8 @@ public class GruntScript : MonoBehaviour
     public void Hit()
     {
             Health -= 1;
+            HealthBar.UpdateHealthBar(Health, MaxHealth);
+
             if (Health == 0)
             {
                 ScoreTextScript.Score += 50;

@@ -125,6 +125,7 @@ MonoBehaviour:
   Shoot: {fileID: 8300000, guid: 5c7c93d0c70cda0439ebaa0dbb525a78, type: 3}
   Speed: 2
   BulletImpactPrefab: {fileID: 6687967865382943739, guid: d08c566c2338ad945aa9f86a9c4b9acf, type: 3}
+  Boss: {fileID: 1333150868503796141, guid: f1486d6c151736d48b50bfc6b4fc1a0b, type: 3}
 --- !u!50 &7855386836320737941
 Rigidbody2D:
   serializedVersion: 4

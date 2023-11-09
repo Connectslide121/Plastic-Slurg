@@ -35,7 +35,7 @@ public class CameraScript : MonoBehaviour
 
     public void StopFollowingCharacter()
     {
-        transform.position = BossFightCameraPosition; 
+        transform.position = Vector3.Lerp(transform.position, BossFightCameraPosition, Time.deltaTime * 1.0f);
     }
 
 }

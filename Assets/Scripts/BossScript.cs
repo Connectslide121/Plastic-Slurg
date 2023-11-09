@@ -12,9 +12,11 @@ public class BossScript : MonoBehaviour
     public Vector3 BombYOffset;
     public Vector3 BombXOffset;
     public float ShootingDistance = 2.0f;
+    public float MaxHealth = 32;
+    public float Health = 32;
 
+    private FloatingHealthBar HealthBar;
     private float LastShoot;
-    private int Health = 32;
     private float flickerDuration = 0.5f;
     private Color originalColor;
     private Vector3 playerPosition;
@@ -22,11 +24,20 @@ public class BossScript : MonoBehaviour
     void Start()
     {
         originalColor = GetComponent<SpriteRenderer>().color;
+        HealthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     void Update()
     {
-        playerPosition = Leo.transform.position;
+        if (Leo == null)
+        {
+            Boss.GetComponent<AudioSource>().Stop();
+        }
+
+        if (Leo != null)
+        {
+            playerPosition = Leo.transform.position;
+        }
 
         if (Leo == null) return;
 
@@ -94,6 +105,8 @@ public class BossScript : MonoBehaviour
     public void Hit()
     {
         Health -= 1;
+        HealthBar.UpdateHealthBar(Health, MaxHealth);
+
         if (Health == 0)
         {
             ScoreTextScript.Score += 1000;
