@@ -9,14 +9,22 @@ public class BossDeathScript : MonoBehaviour
 
     private void Start()
     {
+        GameObject Music = GameObject.FindGameObjectWithTag("Music");
+        Music.GetComponent<MusicManagerScript>().StopBossTheme();
+        Music.GetComponent<MusicManagerScript>().PlayMissionCompleteTheme();
+
         GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
         SFX.GetComponent<SFXManagerScript>().PlayBossDeath();
 
-        GameObject Music = GameObject.FindGameObjectWithTag("Music");
-        Music.GetComponent<MusicManagerScript>().PlayMissionCompleteTheme();
-
-
         GetComponent<Rigidbody2D>().AddForce(Vector2.down * downwardForce, ForceMode2D.Impulse);
+        Invoke("FreezeGame", lifeTime);
+
         Destroy(gameObject, lifeTime);
+
+    }
+
+    private void FreezeGame()
+    {
+        Time.timeScale = 0;
     }
 }

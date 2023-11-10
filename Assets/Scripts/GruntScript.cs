@@ -43,6 +43,9 @@ public class GruntScript : MonoBehaviour
 
     private void Shoot()
     {
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayShoot();
+
         Vector3 direction;
         if (transform.localScale.x == 1)
         {
@@ -70,7 +73,6 @@ public class GruntScript : MonoBehaviour
             }
             else
             {
-                // Call a method to start the flicker effect
                 StartFlickerEffect();
             }
     }
@@ -86,15 +88,13 @@ public class GruntScript : MonoBehaviour
 
         while (flickerTimer < flickerDuration)
         {
-            // Calculate the alpha value based on the flicker timer.
             float alpha = flickerTimer / flickerDuration;
-            alpha = Mathf.PingPong(alpha * 5f, 1f); // Adjust the speed as needed
+            alpha = Mathf.PingPong(alpha * 5f, 1f); 
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
             flickerTimer += Time.deltaTime;
             yield return null;
         }
 
-        // Reset the sprite renderer to its original state.
         GetComponent<SpriteRenderer>().color = originalColor;
     }
 

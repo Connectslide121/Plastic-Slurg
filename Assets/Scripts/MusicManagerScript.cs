@@ -5,7 +5,6 @@ using UnityEngine;
 public class MusicManagerScript : MonoBehaviour
 {
     public AudioSource MainTheme;
-    public AudioSource MainMenuTheme;
     public AudioSource BossTheme;
     public AudioSource MissionCompleTheme;
 
@@ -19,14 +18,14 @@ public class MusicManagerScript : MonoBehaviour
         MainTheme.Stop();
     }
 
-    public void PlayMainMenuTheme()
-    {
-        MainMenuTheme.Play();
-    }
-
     public void PlayBossTheme()
     {
         BossTheme.Play();
+    }
+
+    public void StopBossTheme()
+    {
+        BossTheme.Stop();
     }
 
     public void PlayMissionCompleteTheme()

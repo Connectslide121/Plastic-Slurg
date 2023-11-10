@@ -6,7 +6,6 @@ public class BossIntroScript : MonoBehaviour
 {
     public float upwardForce;
     public float lifeTime;
-    public AudioClip BossIntro;
     public GameObject Boss;
 
     private void Start()
@@ -20,15 +19,12 @@ public class BossIntroScript : MonoBehaviour
 
     private IEnumerator ActivateBossDelayed()
     {
-        // Wait for the specified lifetime
         yield return new WaitForSeconds(lifeTime);
 
-        // Activate the "Boss" GameObject
-        if (Boss != null)
-        {
-            Boss.SetActive(true);
-        }
-        // Destroy the current game object
+        GameObject Music = GameObject.FindGameObjectWithTag("Music");
+        Music.GetComponent<MusicManagerScript>().PlayBossTheme();
+
+        Boss.SetActive(true);
         Destroy(gameObject);
     }
 

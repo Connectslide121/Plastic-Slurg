@@ -5,76 +5,76 @@ using UnityEngine;
 public class SFXManagerScript : MonoBehaviour
 {
 
-    public AudioSource AmmoTaken;
-    public AudioSource BossBomb;
-    public AudioSource BossDeath;
-    public AudioSource BossFire;
-    public AudioSource BossIntro;
-    public AudioSource CoinTaken;
-    public AudioSource GameOver;
-    public AudioSource HeartTaken;
-    public AudioSource Hurt;
-    public AudioSource Jump;
-    public AudioSource JumpBoostTaken;
-    public AudioSource Shoot;
+    public AudioClip AmmoTaken;
+    public AudioClip BossBomb;
+    public AudioClip BossDeath;
+    public AudioClip BossFire;
+    public AudioClip BossIntro;
+    public AudioClip CoinTaken;
+    public AudioClip GameOver;
+    public AudioClip HeartTaken;
+    public AudioClip Hurt;
+    public AudioClip Jump;
+    public AudioClip JumpBoostTaken;
+    public AudioClip Shoot;
 
     public void PlayAmmoTaken()
     {
-        AmmoTaken.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(AmmoTaken);
     }
 
     public void PlayBossBomb()
     {
-        BossBomb.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(BossBomb);
     }
 
     public void PlayBossDeath()
     {
-        BossDeath.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(BossDeath);
     }
 
     public void PlayBossFire()
     {
-        BossFire.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(BossFire);
     }
 
     public void PlayBossIntro()
     {
-        BossIntro.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(BossIntro);
     }
 
     public void PlayCoinTaken()
     {
-        CoinTaken.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(CoinTaken);
     }
 
     public void PlayGameOver()
     {
-        GameOver.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(GameOver);
     }
 
     public void PlayHeartTaken()
     {
-        HeartTaken.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(HeartTaken);
     }
 
     public void PlayHurt()
     {
-        Hurt.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Hurt);
     }
 
     public void PlayJump()
     {
-        Jump.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Jump);
     }
 
     public void PlayJumpBoostTaken()
     {
-        JumpBoostTaken.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(JumpBoostTaken);
     }
 
     public void PlayShoot()
     {
-        Shoot.Play();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(Shoot);
     }
 }

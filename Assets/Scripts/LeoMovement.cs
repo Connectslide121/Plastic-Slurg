@@ -10,7 +10,7 @@ public class LeoMovement : MonoBehaviour
     public float ShootCoolDown = 0.05f;
     public GameObject BulletPrefab;
     public GameObject LeoDeathPrefab;
-    public GameObject Boss;
+    public GameObject GameOverScreen;
     public LayerMask ropeLayer;
     public float hangingHeight = 0.5f;
     public float hangingMoveSpeed = 5f;
@@ -29,6 +29,9 @@ public class LeoMovement : MonoBehaviour
 
     void Start()
     {
+        GameObject Music = GameObject.FindGameObjectWithTag("Music");
+        Music.GetComponent<MusicManagerScript>().PlayMainTheme();
+
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         wallLayer = LayerMask.GetMask("Walls");
@@ -131,11 +134,14 @@ public class LeoMovement : MonoBehaviour
     {
         GameObject Music = GameObject.FindGameObjectWithTag("Music");
         Music.GetComponent<MusicManagerScript>().StopMainTheme();
+        Music.GetComponent<MusicManagerScript>().StopBossTheme();
         GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
         SFX.GetComponent<SFXManagerScript>().PlayGameOver();
 
         Destroy(gameObject);
         Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
+
+        GameOverScreen.SetActive(true);
     }
 
     private void Jump()
@@ -148,6 +154,9 @@ public class LeoMovement : MonoBehaviour
 
     private void Shoot()
     {
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayShoot();
+
         Vector3 direction;
         if (transform.localScale.x == 1)
         {
@@ -187,15 +196,13 @@ public class LeoMovement : MonoBehaviour
 
         while (flickerTimer < flickerDuration)
         {
-            // Calculate the alpha value based on the flicker timer.
             float alpha = flickerTimer / flickerDuration;
-            alpha = Mathf.PingPong(alpha * 5f, 1f); // Adjust the speed as needed
+            alpha = Mathf.PingPong(alpha * 5f, 1f); 
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
             flickerTimer += Time.deltaTime;
             yield return null;
         }
 
-        // Reset the sprite renderer to its original state.
         GetComponent<SpriteRenderer>().color = originalColor;
     }
 

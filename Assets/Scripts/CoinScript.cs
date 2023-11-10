@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    public int ScoreToAdd = 10;
     public GameObject CoinTakenPrefab;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ScoreTextScript.Score += ScoreToAdd;
+        CoinTextScript.Coins += 1;
         Instantiate(CoinTakenPrefab, transform.position, Quaternion.identity);
         DestroyCoin();
     }

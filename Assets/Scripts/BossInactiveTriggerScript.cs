@@ -11,6 +11,9 @@ public class BossInactiveTriggerScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Boss.SetActive(false);
+            GameObject Music = GameObject.FindGameObjectWithTag("Music");
+            Music.GetComponent<MusicManagerScript>().StopBossTheme();
+
         }
     }
 

@@ -6,7 +6,6 @@ public class BulletScript : MonoBehaviour
 {
     public float Speed;
     public GameObject BulletImpactPrefab;
-    public AudioClip Shoot;
 
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
@@ -15,7 +14,6 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(Shoot);
         Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 

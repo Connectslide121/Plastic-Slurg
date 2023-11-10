@@ -9,6 +9,7 @@ public class BossScript : MonoBehaviour
     public GameObject BossBody;
     public GameObject Boss;
     public GameObject BossBombPrefab;
+    public GameObject MissionCompleteScreen;
     public Vector3 BombYOffset;
     public Vector3 BombXOffset;
     public float ShootingDistance = 2.0f;
@@ -29,10 +30,6 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
-        if (Leo == null)
-        {
-            Boss.GetComponent<AudioSource>().Stop();
-        }
 
         if (Leo != null)
         {
@@ -88,6 +85,9 @@ public class BossScript : MonoBehaviour
 
     private void Shoot()
     {
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayBossFire();
+
         Vector3 playerDirection = (Leo.transform.position - transform.position).normalized;
 
         GameObject bullet = Instantiate(BulletPrefab, transform.position + playerDirection * 0.1f, Quaternion.identity);
@@ -115,10 +115,10 @@ public class BossScript : MonoBehaviour
             ScoreTextScript.Score += 1000;
             Boss.GetComponent<BossPrefabScript>().BossPrefabSpawn();
             Destroy(Boss);
+            MissionCompleteScreen.SetActive(true);
         }
         else
         {
-            // Call a method to start the flicker effect
             StartFlickerEffect();
         }
     }
@@ -134,15 +134,13 @@ public class BossScript : MonoBehaviour
 
         while (flickerTimer < flickerDuration)
         {
-            // Calculate the alpha value based on the flicker timer.
             float alpha = flickerTimer / flickerDuration;
-            alpha = Mathf.PingPong(alpha * 5f, 1f); // Adjust the speed as needed
+            alpha = Mathf.PingPong(alpha * 5f, 1f); 
             GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
             flickerTimer += Time.deltaTime;
             yield return null;
         }
 
-        // Reset the sprite renderer to its original state.
         GetComponent<SpriteRenderer>().color = originalColor;
     }
 
