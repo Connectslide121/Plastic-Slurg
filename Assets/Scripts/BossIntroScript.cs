@@ -11,7 +11,9 @@ public class BossIntroScript : MonoBehaviour
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(BossIntro);
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayBossIntro();
+
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * upwardForce, ForceMode2D.Impulse);
         StartCoroutine(ActivateBossDelayed());
     }
@@ -26,17 +28,8 @@ public class BossIntroScript : MonoBehaviour
         {
             Boss.SetActive(true);
         }
-        else
-        {
-            Debug.LogWarning("Boss GameObject is not assigned.");
-        }
-
         // Destroy the current game object
         Destroy(gameObject);
-    }
-    public void StopMainTheme()
-    {
-        Camera.main.GetComponent<AudioSource>().Stop();
     }
 
 }

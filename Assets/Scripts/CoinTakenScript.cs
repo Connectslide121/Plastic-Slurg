@@ -6,12 +6,13 @@ public class CoinTakenScript : MonoBehaviour
 {
     public float upwardForce;
     public float lifeTime;
-    public AudioClip CoinTaken;
 
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(CoinTaken);
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayCoinTaken();
+
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * upwardForce, ForceMode2D.Impulse);
         Destroy(gameObject, lifeTime);
     }

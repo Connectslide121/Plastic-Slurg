@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
 {
-    public AudioClip Shoot;
     public float Speed;
+    public AudioClip Shoot;
 
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
@@ -14,8 +14,8 @@ public class EnemyBulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
         Camera.main.GetComponent<AudioSource>().PlayOneShot(Shoot);
+        Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

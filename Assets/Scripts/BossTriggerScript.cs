@@ -11,9 +11,12 @@ public class BossTriggerScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            GameObject Music = GameObject.FindGameObjectWithTag("Music");
+            Music.GetComponent<MusicManagerScript>().StopMainTheme();
+
+
             Boss.SetActive(true);
             Camera.GetComponent<CameraScript>().StopFollowingCharacter();
-            Boss.GetComponent<BossIntroScript>().StopMainTheme();
             Camera.GetComponent <CameraScript>().BossFight = true;
 
         }

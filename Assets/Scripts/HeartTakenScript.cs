@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class HeartTakenScript : MonoBehaviour
 {
-    public AudioClip HeartTaken;
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(HeartTaken);
-
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayHeartTaken();
     }
 
     public void DestroyHeart()

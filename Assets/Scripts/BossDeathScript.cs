@@ -6,14 +6,16 @@ public class BossDeathScript : MonoBehaviour
 {
     public float downwardForce = 1;
     public float lifeTime = 1;
-    public AudioClip BossDeath;
-    public AudioClip MissionCompleted;
-
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(BossDeath);
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(MissionCompleted);
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayBossDeath();
+
+        GameObject Music = GameObject.FindGameObjectWithTag("Music");
+        Music.GetComponent<MusicManagerScript>().PlayMissionCompleteTheme();
+
+
         GetComponent<Rigidbody2D>().AddForce(Vector2.down * downwardForce, ForceMode2D.Impulse);
         Destroy(gameObject, lifeTime);
     }

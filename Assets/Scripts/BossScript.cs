@@ -96,6 +96,9 @@ public class BossScript : MonoBehaviour
 
     private void ShootBombs()
     {
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayBossBomb();
+
         Instantiate(BossBombPrefab, playerPosition + BombYOffset, Quaternion.Euler(0, 0, -90));
         Instantiate(BossBombPrefab, playerPosition + BombYOffset - BombXOffset, Quaternion.Euler(0, 0, -90));
         Instantiate(BossBombPrefab, playerPosition + BombYOffset + BombXOffset, Quaternion.Euler(0, 0, -90));

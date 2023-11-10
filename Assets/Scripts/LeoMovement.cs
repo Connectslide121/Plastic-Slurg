@@ -11,9 +11,6 @@ public class LeoMovement : MonoBehaviour
     public GameObject BulletPrefab;
     public GameObject LeoDeathPrefab;
     public GameObject Boss;
-    public AudioClip HurtSound;
-    public AudioClip DeathSound;
-    public AudioClip JumpSound;
     public LayerMask ropeLayer;
     public float hangingHeight = 0.5f;
     public float hangingMoveSpeed = 5f;
@@ -132,8 +129,10 @@ public class LeoMovement : MonoBehaviour
 
     public void GameOver()
     {
-        Camera.main.GetComponent<AudioSource>().Stop();
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(DeathSound);
+        GameObject Music = GameObject.FindGameObjectWithTag("Music");
+        Music.GetComponent<MusicManagerScript>().StopMainTheme();
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayGameOver();
 
         Destroy(gameObject);
         Instantiate(LeoDeathPrefab, transform.position, Quaternion.identity);
@@ -141,7 +140,8 @@ public class LeoMovement : MonoBehaviour
 
     private void Jump()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(JumpSound);
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayJump();
 
         Rigidbody2D.AddForce(Vector2.up * JumpForce);
     }
@@ -166,7 +166,8 @@ public class LeoMovement : MonoBehaviour
 
     public void Hit()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(HurtSound);
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayHurt();
 
         HealthTextScript.Health = HealthTextScript.Health - 1;
         StartFlickerEffect();
@@ -175,10 +176,10 @@ public class LeoMovement : MonoBehaviour
 
     private void StartFlickerEffect()
     {
-        StartCoroutine(FlickerEnemy());
+        StartCoroutine(FlickerLeo());
     }
 
-    private IEnumerator FlickerEnemy()
+    private IEnumerator FlickerLeo()
     {
         float flickerTimer = 0f;
         float flickerDuration = 0.5f;

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AmmoTakenScript : MonoBehaviour
 {
-    public AudioClip explode;
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(explode);
-
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayAmmoTaken();
     }
 
     public void DestroyAmmo()

@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class JumpBoostTakenScript : MonoBehaviour
 {
-    public AudioClip JumpBoostTaken;
 
     private void Start()
     {
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(JumpBoostTaken);
-
+        GameObject SFX = GameObject.FindGameObjectWithTag("SFX");
+        SFX.GetComponent<SFXManagerScript>().PlayJumpBoostTaken();
     }
 
     public void DestroyJumpBoostTaken()
